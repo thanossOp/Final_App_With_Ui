@@ -17,11 +17,11 @@
   },
   {
     "user": "I'm not interested, and I don't have time for this.",
-    "ai": "I understand that your time is valuable. To make things more convenient for you, we can schedule a call at a time that suits you best. Whether it's during lunch or after work, we'll work around your schedule. How does that sound?"
+    "ai": "I understand that your time is valuable. To make things more convenient for you, we can schedule a call at a time that suits you best. If you want to schedule a call please say schedule my call. How does that sound?"
   },
   {
     "user": "I really don't want to schedule anything right now.",
-    "ai": "I appreciate your honesty. If there's ever a more convenient time for you or if you change your mind, please feel free to reach out to us. We're here to assist you with any users or concerns you may have. Thank you for your time, and have a wonderful day."
+    "ai": "I appreciate your honesty. If there's ever a more convenient time for you or if you change your mind, please feel free to reach out to us. We're here to assist you with any users or concerns you may have."
   },
   {
     "user": "I am interested. Tell me more.",
@@ -29,7 +29,7 @@
   },
   {
     "user": "Sure, but can you call me letter",
-    "ai": "yes we can schedule your call. Could you please let me know when it would be convenient for you to have a short call? We can schedule it during lunch, after work, or any other time that suits you best."
+    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
   },
   {
     "user": "I'm looking for coverage for my family and want something within a certain budget.",
@@ -96,7 +96,27 @@
     "ai": "I'm reaching out because we have some excellent health insurance options that could be beneficial for you and your family."
   },
   {
-    "user": "i don't have i am not interested",
-    "ai": "I understand that your time is valuable. To make things more convenient for you, we can schedule a call at a time that suits you best. Whether it's during lunch or after work, we'll work around your schedule. How does that sound?"
+    "user": "sure but can you call me later",
+    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
+  },
+  {
+    "user": "sure but i am busy right now can you call me later",
+    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
+  },
+  {
+    "user": "i m fine but i am busy right now can you call me later",
+    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
+  },
+  {
+    "user": "i am fine but i am busy right now can you call me later",
+    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
+  },
+  {
+    "user": "find but i am busy right now can you call me later",
+    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
+  },
+  {
+    "user": "i am fine thank you what can i do for you",
+    "ai": "I'm reaching out because we have some excellent health insurance options that could be beneficial for you and your family."
   }
 ]
