@@ -142,11 +142,20 @@ def getresponse(user):
 if __name__ == "__main__":
     greet_user()
     
-    negative_keywords = ["not interested", "dont want", "dont have time", "dont need"]
+    negative_keywords = ["not interested", "don't want", "don't have time", "don't need"]
     consecutive_negative_responses = 0
 
+    
+        
     while True:
         user_input = get_speech_input()
+        if any(keyword in user_input.lower() for keyword in negative_keywords):
+            consecutive_negative_responses += 1
+        else:
+            consecutive_negative_responses = 0
+        
+        print('count',consecutive_negative_responses)
+        print('condition',user_input and consecutive_negative_responses < 3)
         if 'schedule my call' in user_input:
             speak("Of course, I'd be happy to schedule the call for you. Could you please let me know what time works best for you?")
             schedule_input = get_speech_input()
@@ -156,17 +165,11 @@ if __name__ == "__main__":
             else:
                 speak("I'm sorry, I couldn't understand the scheduling time. Let's try again.")
             break
-        elif user_input:
+        elif user_input and consecutive_negative_responses < 4:
             response = getresponse(user_input)
             speak(response)
-        else:
-            break
-        
-        if any(keyword in user_input.lower() for keyword in negative_keywords):
-            consecutive_negative_responses += 1
-        else:
-            consecutive_negative_responses = 0
-        
-        if consecutive_negative_responses >= 3:
+        elif consecutive_negative_responses >= 4:
             speak(f"Okk {user_name}. Thank you for your time. Have a great day!")
             break
+        else:
+            break            

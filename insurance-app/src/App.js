@@ -39,11 +39,12 @@ function App() {
   const [callMessage, setCallMessage] = useState("");
 
   const [modalShow, setModalShow] = useState(false);
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
 
   const runPythonScript = async () => {
     try {
       console.log("Sending request to run Python script...");
-
+      setButtonsDisabled(true);
       setRunLoading(true);
       setTimeout(() => {
         setRunMessage("Request sent successfully!");
@@ -70,13 +71,14 @@ function App() {
       console.error("Error connecting to the server:", error);
       setRunMessage("Error connecting to the server.");
       setRunLoading(false);
+      setButtonsDisabled(false);
     }
   };
 
   const runEnquiryScript = async () => {
     try {
       console.log("Sending request to run Python script...");
-
+      setButtonsDisabled(true);
       setEnquiryLoading(true);
       setTimeout(() => {
         setEnquiryMessage("Request sent successfully!");
@@ -103,13 +105,14 @@ function App() {
       console.error("Error connecting to the server:", error);
       setEnquiryMessage("Error connecting to the server.");
       setEnquiryLoading(false);
+      setButtonsDisabled(false);
     }
   };
 
   const runCallScript = async () => {
     try {
       console.log("Sending request to run Python script...");
-
+      setButtonsDisabled(true);
       setCallLoading(true);
       setTimeout(() => {
         setCallMessage("Request sent successfully!");
@@ -136,6 +139,7 @@ function App() {
       console.error("Error connecting to the server:", error);
       setCallMessage("Error connecting to the server.");
       setCallLoading(false);
+      setButtonsDisabled(false);
     }
   };
 
@@ -147,7 +151,7 @@ function App() {
           <button
             className="run-button"
             onClick={runPythonScript}
-            disabled={runLoading}
+            disabled={runLoading || buttonsDisabled}
           >
             {runLoading ? "Request Sent" : "I want to buy Health Insurance"}
           </button>
@@ -156,7 +160,7 @@ function App() {
           <button
             className="enquiry-button"
             onClick={runEnquiryScript}
-            disabled={enquiryLoading}
+            disabled={enquiryLoading || buttonsDisabled}
           >
             {enquiryLoading ? "Request Sent" : "Enquiry"}
           </button>
@@ -164,7 +168,7 @@ function App() {
           <button
             className="call-button"
             onClick={runCallScript}
-            disabled={callLoading}
+            disabled={callLoading || buttonsDisabled}
           >
             {callLoading ? "Request Sent" : "Call User"}
           </button>

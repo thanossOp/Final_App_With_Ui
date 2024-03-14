@@ -17,7 +17,7 @@
   },
   {
     "user": "I'm not interested, and I don't have time for this.",
-    "ai": "I understand that your time is valuable. To make things more convenient for you, we can schedule a call at a time that suits you best. If you want to schedule a call please say schedule my call. How does that sound?"
+    "ai": "I understand that your time is valuable. To make things more convenient for you, we can schedule a call at a time that suits you best. How does that sound?"
   },
   {
     "user": "I really don't want to schedule anything right now.",
@@ -81,42 +81,6 @@
   },
   {
     "user": "what can i do for you",
-    "ai": "I'm reaching out because we have some excellent health insurance options that could be beneficial for you and your family."
-  },
-  {
-    "user": "health insurance i am not inte",
-    "ai": "I appreciate that.but Our plans offer unique advantages, including many benifits. We can provide you with a tailored plan that fits your budget. It will only take about 5 minutes of your time to fill out a form and get a personalized quote."
-  },
-  {
-    "user": "busy right now can we talk later",
-    "ai": "I appreciate your honesty. If there's ever a more convenient time for you or if you change your mind, please feel free to reach out to us. We're here to assist you with any users or concerns you may have. Thank you for your time, and have a wonderful day."
-  },
-  {
-    "user": "i am fine",
-    "ai": "I'm reaching out because we have some excellent health insurance options that could be beneficial for you and your family."
-  },
-  {
-    "user": "sure but can you call me later",
-    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
-  },
-  {
-    "user": "sure but i am busy right now can you call me later",
-    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
-  },
-  {
-    "user": "i m fine but i am busy right now can you call me later",
-    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
-  },
-  {
-    "user": "i am fine but i am busy right now can you call me later",
-    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
-  },
-  {
-    "user": "find but i am busy right now can you call me later",
-    "ai": "yes we can schedule your call. If you want to schedule a call please say schedule my call."
-  },
-  {
-    "user": "i am fine thank you what can i do for you",
     "ai": "I'm reaching out because we have some excellent health insurance options that could be beneficial for you and your family."
   }
 ]
