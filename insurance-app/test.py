@@ -48,7 +48,10 @@
 # print("Parsed Date and Time:", result)
 
 import pymongo
-mongourl = "mongodb://localhost:27017/register"
+
+mongourl = "mongodb://localhost:27017/['call_data']"
 client = pymongo.MongoClient(mongourl)
-database = client["register"]
-collection = database["users"]
+database = client["call_data"]
+collection = database["data"]
+
+print(collection)

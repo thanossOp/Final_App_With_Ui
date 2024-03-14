@@ -5,19 +5,19 @@ import os
 from sentence_transformers import SentenceTransformer, util
 from dateutil import parser
 from datetime import datetime, timedelta
+from pymongo import MongoClient
 
 model = SentenceTransformer("paraphrase-MiniLM-L6-v2")
 
-try:
-    json_file_path = os.path.join(os.path.dirname(__file__), "call.json")
-    with open("call.json", "r") as file:
-        dataset = json.load(file)
-except FileNotFoundError:
-    dataset = []
+client = MongoClient("mongodb://localhost:27017/call_data")
+db = client["call_data"]
+dataset_collection = db["data"]
+dataset = list(dataset_collection.find())
 
 current_session_file_path = None
 
 user_name = "nisarg"
+
 
 def log_interaction(log_text):
     global current_session_file_path
@@ -55,7 +55,9 @@ def speak(response):
 
 def get_speech_input(try_count=0, max_tries=3):
     if try_count >= max_tries:
-        speak("It seems we're having trouble with the connection.I will call you latter. Goodbye!")
+        speak(
+            "It seems we're having trouble with the connection.I will call you latter. Goodbye!"
+        )
         return None
 
     r = sr.Recognizer()
@@ -90,12 +92,23 @@ def greet_user():
         f"my name is thanos, and I'm calling from Health Insurance system. How are you today?"
     )
 
+
 def extract_date_time(sentence):
     today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-    
-    sentence = sentence.replace("tomorrow", (today + timedelta(days=1)).strftime("%Y-%m-%d"))
 
-    weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    sentence = sentence.replace(
+        "tomorrow", (today + timedelta(days=1)).strftime("%Y-%m-%d")
+    )
+
+    weekdays = [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+    ]
     for day in weekdays:
         if day in sentence.lower():
             day_index = weekdays.index(day)
@@ -103,15 +116,18 @@ def extract_date_time(sentence):
             target_date = today + timedelta(days=days_until_day)
             sentence = sentence.replace(day, target_date.strftime("%Y-%m-%d"))
             break
-    
+
     parsed_date_time = parser.parse(sentence, fuzzy=True)
-    
+
     if parsed_date_time < datetime.now():
-        speak("date and time is earlier than today's date and time. Can you please provide me valid date and time")
+        speak(
+            "date and time is earlier than today's date and time. Can you please provide me valid date and time"
+        )
         new_input = get_speech_input()
         return extract_date_time(new_input)
-    
+
     return parsed_date_time
+
 
 def getresponse(user):
 
@@ -132,38 +148,44 @@ def getresponse(user):
         answer = dataset[most_similar_index]["ai"]
         if user.lower() != dataset[most_similar_index]["user"].lower():
             newdata = {"user": user, "ai": answer}
-            dataset.append(newdata)
-
-            with open("call.json", "w") as file:
-                json.dump(dataset, file, indent=2)
+            dataset_collection.insert_one(newdata)
         return answer
 
 
 if __name__ == "__main__":
     greet_user()
-    
-    negative_keywords = ["not interested", "don't want", "don't have time", "don't need"]
+
+    negative_keywords = [
+        "not interested",
+        "don't want",
+        "don't have time",
+        "don't need",
+    ]
     consecutive_negative_responses = 0
 
-    
-        
     while True:
-        user_input = get_speech_input()
+        user_input = "I am fine. what can i do for you"
         if any(keyword in user_input.lower() for keyword in negative_keywords):
             consecutive_negative_responses += 1
         else:
             consecutive_negative_responses = 0
-        
-        print('count',consecutive_negative_responses)
-        print('condition',user_input and consecutive_negative_responses < 3)
-        if 'schedule my call' in user_input:
-            speak("Of course, I'd be happy to schedule the call for you. Could you please let me know what time works best for you?")
+
+        print("count", consecutive_negative_responses)
+        print("condition", user_input and consecutive_negative_responses < 3)
+        if "schedule my call" in user_input:
+            speak(
+                "Of course, I'd be happy to schedule the call for you. Could you please let me know what time works best for you?"
+            )
             schedule_input = get_speech_input()
             schedule_time = extract_date_time(schedule_input)
             if schedule_time:
-                speak(f"Excellent! I've scheduled the call for {schedule_time} to discuss your health insurance plan. Thank you for your time. Have a great day {user_name}.")
+                speak(
+                    f"Excellent! I've scheduled the call for {schedule_time} to discuss your health insurance plan. Thank you for your time. Have a great day {user_name}."
+                )
             else:
-                speak("I'm sorry, I couldn't understand the scheduling time. Let's try again.")
+                speak(
+                    "I'm sorry, I couldn't understand the scheduling time. Let's try again."
+                )
             break
         elif user_input and consecutive_negative_responses < 4:
             response = getresponse(user_input)
@@ -172,4 +194,4 @@ if __name__ == "__main__":
             speak(f"Okk {user_name}. Thank you for your time. Have a great day!")
             break
         else:
-            break            
+            break

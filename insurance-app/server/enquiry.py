@@ -6,14 +6,15 @@ import json
 import datetime
 import os
 import re
+from pymongo import MongoClient
+
 
 model = SentenceTransformer("paraphrase-MiniLM-L6-v2")
 
-try:
-    with open("health.json", "r") as file:
-        dataset = json.load(file)
-except FileNotFoundError:
-    dataset = []
+client = MongoClient("mongodb://localhost:27017/enquiry_data")
+db = client["enquiry_data"]
+dataset_collection = db["data"]
+dataset = list(dataset_collection.find())
 
 current_session_file_path = None
 
@@ -117,7 +118,8 @@ def extract_name():
             return valid_names[0]
         else:
             return None
-        
+
+
 def get_response(user_question):
 
     user_question_embeding = model.encode(user_question, convert_to_tensor=True)
@@ -138,10 +140,7 @@ def get_response(user_question):
         chatgpt_response = generate_chatgpt_response(user_question)
 
         newdata = {"question": user_question, "answer": chatgpt_response}
-        dataset.append(newdata)
-
-        with open("health.json", "w") as file:
-            json.dump(dataset, file, indent=2)
+        dataset_collection.insert_one(newdata)
 
         speak(chatgpt_response)
         return chatgpt_response
@@ -150,12 +149,11 @@ def get_response(user_question):
         answer = dataset[most_similar_index]["answer"]
         if user_question.lower() != dataset[most_similar_index]["question"].lower():
             newdata = {"question": user_question, "answer": answer}
-            dataset.append(newdata)
-
-            with open("health.json", "w") as file:
-                json.dump(dataset, file, indent=2)
+            dataset_collection.insert_one(newdata)
         return answer
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     speak("Hello! What is your name?")
     user_name = extract_name()
 
