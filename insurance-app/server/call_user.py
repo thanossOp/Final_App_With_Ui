@@ -1,6 +1,5 @@
 import pyttsx3
 import speech_recognition as sr
-import json
 import os
 from sentence_transformers import SentenceTransformer, util
 from dateutil import parser
@@ -161,7 +160,7 @@ if __name__ == "__main__":
     consecutive_negative_responses = 0
 
     while True:
-        user_input = get_speech_input()
+        user_input = 'I am fine'
         if any(keyword in user_input.lower() for keyword in negative_keywords):
             consecutive_negative_responses += 1
         else:

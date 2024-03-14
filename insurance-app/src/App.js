@@ -61,6 +61,7 @@ function App() {
       if (response.ok) {
         console.log("Python script executed successfully");
         setModalShow(true);
+        setButtonsDisabled(false)
       } else {
         console.error("Failed to execute Python script");
         setRunMessage("Failed to send request.");
@@ -95,6 +96,7 @@ function App() {
       if (response.ok) {
         console.log("Python script executed successfully");
         setModalShow(true);
+        setButtonsDisabled(false)
       } else {
         console.error("Failed to execute Python script");
         setEnquiryMessage("Failed to send request.");
@@ -129,6 +131,8 @@ function App() {
       if (response.ok) {
         console.log("Python script executed successfully");
         setModalShow(true);
+        setButtonsDisabled(false)
+
       } else {
         console.error("Failed to execute Python script");
         setCallMessage("Failed to send request.");

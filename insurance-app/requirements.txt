@@ -1,0 +1,13 @@
+pyttsx3
+speech_recognition
+os
+sentence_transformers 
+dateutil 
+datetime 
+pymongo 
+transformers 
+json
+re
+pandas
+spacy
+scikit-learn
