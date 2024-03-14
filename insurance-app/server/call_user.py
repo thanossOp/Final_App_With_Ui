@@ -61,15 +61,12 @@ def get_speech_input(try_count=0, max_tries=3):
         return None
 
     r = sr.Recognizer()
-    print("Listening....")
     with sr.Microphone() as source:
         r.adjust_for_ambient_noise(source)
         audio = r.listen(source, phrase_time_limit=10, timeout=10)
 
     try:
-        print("Recognizing...")
         user_input = r.recognize_google(audio)
-        print("command", user_input)
         log_interaction(f"User said: {user_input}\n")
         return user_input.lower()
     except sr.UnknownValueError as e:
@@ -164,14 +161,12 @@ if __name__ == "__main__":
     consecutive_negative_responses = 0
 
     while True:
-        user_input = "I am fine. what can i do for you"
+        user_input = get_speech_input()
         if any(keyword in user_input.lower() for keyword in negative_keywords):
             consecutive_negative_responses += 1
         else:
             consecutive_negative_responses = 0
 
-        print("count", consecutive_negative_responses)
-        print("condition", user_input and consecutive_negative_responses < 3)
         if "schedule my call" in user_input:
             speak(
                 "Of course, I'd be happy to schedule the call for you. Could you please let me know what time works best for you?"
