@@ -160,7 +160,7 @@ if __name__ == "__main__":
     consecutive_negative_responses = 0
 
     while True:
-        user_input = 'I am fine'
+        user_input = get_speech_input()
         if any(keyword in user_input.lower() for keyword in negative_keywords):
             consecutive_negative_responses += 1
         else:
