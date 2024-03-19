@@ -4,7 +4,6 @@ import "reactjs-popup/dist/index.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -57,20 +56,16 @@ function App() {
           "Content-Type": "application/json",
         },
       });
-
+      console.log(response);
       if (response.ok) {
         console.log("Python script executed successfully");
         setModalShow(true);
-        setButtonsDisabled(false)
       } else {
-        console.error("Failed to execute Python script");
         setRunMessage("Failed to send request.");
       }
-
-      setRunLoading(false);
     } catch (error) {
-      console.error("Error connecting to the server:", error);
       setRunMessage("Error connecting to the server.");
+    } finally {
       setRunLoading(false);
       setButtonsDisabled(false);
     }
@@ -96,16 +91,12 @@ function App() {
       if (response.ok) {
         console.log("Python script executed successfully");
         setModalShow(true);
-        setButtonsDisabled(false)
       } else {
-        console.error("Failed to execute Python script");
         setEnquiryMessage("Failed to send request.");
       }
-
-      setEnquiryLoading(false);
     } catch (error) {
-      console.error("Error connecting to the server:", error);
       setEnquiryMessage("Error connecting to the server.");
+    } finally {
       setEnquiryLoading(false);
       setButtonsDisabled(false);
     }
@@ -131,17 +122,12 @@ function App() {
       if (response.ok) {
         console.log("Python script executed successfully");
         setModalShow(true);
-        setButtonsDisabled(false)
-
       } else {
-        console.error("Failed to execute Python script");
         setCallMessage("Failed to send request.");
       }
-
-      setCallLoading(false);
     } catch (error) {
-      console.error("Error connecting to the server:", error);
       setCallMessage("Error connecting to the server.");
+    } finally {
       setCallLoading(false);
       setButtonsDisabled(false);
     }
@@ -169,6 +155,7 @@ function App() {
             {enquiryLoading ? "Request Sent" : "Enquiry"}
           </button>
           {enquiryLoading && <p className="message">{enquiryMessage}</p>}
+
           <button
             className="call-button"
             onClick={runCallScript}

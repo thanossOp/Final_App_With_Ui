@@ -47,8 +47,8 @@ def speak(response):
     log_interaction(f"AI said: {response}")
 
 
-def get_speech_input(try_count=0, max_tries=10):
-    if try_count >= max_tries:
+def get_speech_input(try_count=0, max_tries=3):
+    if try_count > max_tries:
         speak("Sorry, maximum number of attempts reached. Please try again later.")
         return None
 
