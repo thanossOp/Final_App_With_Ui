@@ -18,7 +18,7 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>We appreciate your trust in our Insurance Charges Prediction App.</p>
+        <p>We appreciate your trust in our Insurance Charges Prediction Website.</p>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
