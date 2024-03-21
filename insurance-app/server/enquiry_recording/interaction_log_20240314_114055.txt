@@ -1,7 +1,0 @@
-AI said: Hello! What is your name?
-User said: my name is Nisarg
-
-AI said: Good Morning nisarg
-AI said: Welcome to our Health Insurance Planning System!
-AI said: How can i assist you today?
-AI said: Great, If you want to buy a health insurance then click on I Want To Buy Health Insurance button
