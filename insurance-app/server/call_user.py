@@ -62,7 +62,7 @@ def get_speech_input(try_count=0, max_tries=3):
     r = sr.Recognizer()
     with sr.Microphone() as source:
         r.adjust_for_ambient_noise(source)
-        audio = r.listen(source, phrase_time_limit=10, timeout=10)
+        audio = r.listen(source, timeout=10)
 
     try:
         user_input = r.recognize_google(audio)

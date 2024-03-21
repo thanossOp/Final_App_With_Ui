@@ -49,7 +49,7 @@ def speak(response):
 
 def get_speech_input(try_count=0, max_tries=3):
     if try_count > max_tries:
-        speak("Sorry, maximum number of attempts reached. Please try again later.")
+        speak("It seems we're having trouble with the connection.I will call you latter. Goodbye!")
         return None
 
     r = sr.Recognizer()
@@ -63,7 +63,7 @@ def get_speech_input(try_count=0, max_tries=3):
         return user_input.lower()
     except sr.UnknownValueError as e:
         print(e)
-        speak("Can't Understand. Try Again")
+        speak("I couldn't hear you")
         return get_speech_input(try_count + 1, max_tries)
 
 
